@@ -47,7 +47,7 @@ impl Map {
         return point.x >= 0 
             && point.x < SCREEN_WIDTH 
             && point.y >= 0 
-            && point.y > SCREEN_HEIGHT;
+            && point.y < SCREEN_HEIGHT;
     }
 
     pub fn can_enter_in_tile(&self, point: Point) -> bool {
