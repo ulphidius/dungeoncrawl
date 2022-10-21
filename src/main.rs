@@ -1,4 +1,5 @@
 mod map;
+mod player;
 
 mod prelude {
     pub use bracket_lib::prelude::*;
@@ -6,19 +7,22 @@ mod prelude {
     pub const SCREEN_HEIGHT: i32 = 50;
     pub const GAME_TITLE: &str = "Dungeon Crawler";
     pub const GAME_FPS: f32 = 30.0;
-    pub use crate::map::*; 
+    pub use crate::map::*;
+    pub use crate::player::*;
 }
 
 use prelude::*;
 
 struct State {
     map: Map,
+    player: Player,
 }
 
 impl State {
     fn new() -> Self {
         return Self {
             map: Map::new(NUM_TILES),
+            player: Player::new(Point::new(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)),
         };
     }
 }
@@ -26,7 +30,11 @@ impl State {
 impl GameState for State {
     fn tick(&mut self, ctx: &mut BTerm) {
         ctx.cls();
+
+        self.player.update(ctx, &self.map);
+
         self.map.render(ctx);
+        self.player.render(ctx);
     }
 }
 

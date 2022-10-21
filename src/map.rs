@@ -42,6 +42,25 @@ impl Map {
             }
         }
     }
+
+    pub fn in_bounds(&self, point: Point) -> bool {
+        return point.x >= 0 
+            && point.x < SCREEN_WIDTH 
+            && point.y >= 0 
+            && point.y > SCREEN_HEIGHT;
+    }
+
+    pub fn can_enter_in_tile(&self, point: Point) -> bool {
+        return self.in_bounds(point)
+            && self.tiles[map_idx(point.x, point.y)] == TileType::Floor;
+    }
+
+    pub fn try_idx(&self, point: Point) -> Option<usize> {
+        return match self.in_bounds(point) {
+            true => Some(map_idx(point.x, point.y)),
+            false=> None,
+        };
+    }
 }
 
 /// striding function: raw_first encoding.
