@@ -1,4 +1,5 @@
 mod map;
+mod map_builder;
 mod player;
 
 mod prelude {
@@ -8,6 +9,7 @@ mod prelude {
     pub const GAME_TITLE: &str = "Dungeon Crawler";
     pub const GAME_FPS: f32 = 30.0;
     pub use crate::map::*;
+    pub use crate::map_builder::*;
     pub use crate::player::*;
 }
 
@@ -20,9 +22,11 @@ struct State {
 
 impl State {
     fn new() -> Self {
+        let mut rng = RandomNumberGenerator::new();
+        let map_builder = MapBuilder::new(NUM_TILES, &mut rng);
         return Self {
-            map: Map::new(NUM_TILES),
-            player: Player::new(Point::new(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)),
+            map: map_builder.map,
+            player: Player::new(map_builder.player_start),
         };
     }
 }

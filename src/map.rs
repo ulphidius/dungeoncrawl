@@ -1,12 +1,13 @@
 use crate::prelude::*;
 pub const NUM_TILES: usize = (SCREEN_WIDTH * SCREEN_HEIGHT) as usize;
 
-#[derive(Clone, Copy, PartialEq)]
+#[derive(Clone, Copy, PartialEq, Debug)]
 pub enum TileType {
     Wall,
     Floor,
 }
 
+#[derive(Debug)]
 pub struct Map {
     pub tiles: Vec<TileType>
 }
