@@ -85,7 +85,6 @@ impl MapBuilder {
         rooms.sort_by(|a, b| a.center().x.cmp(&b.center().x));
 
         for (i, room) in rooms.iter().enumerate().skip(1) {
-            dbg!(room);
             let prev = rooms[i-1].center();
             let new = room.center();
 
