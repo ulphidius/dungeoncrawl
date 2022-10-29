@@ -2,6 +2,12 @@
 name = "dungeoncrawl"
 version = "0.1.0"
 edition = "2021"
+authors = ["ulphidius"]
+readme = "README.md"
+description = "tutorial project of hands-on Rust book"
+keywords = ["gamedev", "tutorial"]
+license-file = "LICENCE.txt"
+publish = false
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
