@@ -1,6 +1,7 @@
 use crate::prelude::*;
 
 const INSTRUCTION_MESSAGE: &str = "Explore the Dungeon, Cursor keys to move.";
+const SORT_ORDER: usize = 10000;
 
 #[system]
 #[read_component(Health)]
@@ -10,7 +11,7 @@ pub fn hud(ecs: &SubWorld) {
     let player_health = health_query.iter(ecs).nth(0).unwrap();
 
     let mut draw_batch = DrawBatch::new();
-    draw_batch.target(2);
+    draw_batch.target(HUD_LAYER);
     draw_batch.print_centered(1, INSTRUCTION_MESSAGE);
 
     draw_batch.bar_horizontal(
@@ -30,5 +31,5 @@ pub fn hud(ecs: &SubWorld) {
         ColorPair::new(WHITE, RED),
     );
 
-    draw_batch.submit(10000).expect("Batch error");
+    draw_batch.submit(SORT_ORDER).expect("Batch error");
 }

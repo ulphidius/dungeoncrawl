@@ -26,6 +26,11 @@ mod prelude {
     pub const TILE_WIDTH: i32 = 32;
     pub const GAME_TITLE: &str = "Dungeon Crawler";
     pub const GAME_FPS: f32 = 30.0;
+    pub const CHAR_WIDTH: i32 = 8;
+    pub const CHAR_HEIGHT: i32 = 8;
+    pub const MAP_LAYER: usize = 0;
+    pub const ENTITIES_LAYER: usize = 1;
+    pub const HUD_LAYER: usize = 2;
 }
 
 use prelude::*;
@@ -69,17 +74,20 @@ impl State {
 
 impl GameState for State {
     fn tick(&mut self, ctx: &mut BTerm) {
-        ctx.set_active_console(0);
+        ctx.set_active_console(MAP_LAYER);
         ctx.cls();
 
-        ctx.set_active_console(1);
+        ctx.set_active_console(ENTITIES_LAYER);
         ctx.cls();
 
-        ctx.set_active_console(2);
+        ctx.set_active_console(HUD_LAYER);
         ctx.cls();
 
         self.resources.insert(ctx.key);
-        
+        ctx.set_active_console(MAP_LAYER);
+
+        self.resources.insert(Point::from_tuple(ctx.mouse_pos()));
+
         let current_state = self.resources.get::<TurnState>().unwrap().clone();
 
         match current_state {
@@ -100,7 +108,7 @@ fn main() -> BError {
         .with_tile_dimensions(TILE_WIDTH, TILE_HEIGHT)
         .with_resource_path("resources/")
         .with_font("dungeonfont.png", TILE_WIDTH, TILE_HEIGHT)
-        .with_font("terminal8x8.png", 8, 8)
+        .with_font("terminal8x8.png", CHAR_WIDTH, CHAR_HEIGHT)
         .with_simple_console(DISPLAY_WIDTH, DISPLAY_HEIGHT, "dungeonfont.png")
         .with_simple_console_no_bg(DISPLAY_WIDTH, DISPLAY_HEIGHT, "dungeonfont.png")
         .with_simple_console_no_bg(DISPLAY_WIDTH*2, DISPLAY_HEIGHT*2, "terminal8x8.png")

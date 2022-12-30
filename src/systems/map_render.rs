@@ -1,14 +1,12 @@
 use crate::prelude::*;
 
-const CONSOLE_TO_RENDER: usize = 0;
-
 #[system]
 pub fn map_render(
     #[resource] map: &Map,
     #[resource] camera: &Camera,
 ) {
     let mut draw_batch = DrawBatch::new();
-    draw_batch.target(CONSOLE_TO_RENDER);
+    draw_batch.target(MAP_LAYER);
 
     for y in camera.top_y ..= camera.bottom_y {
         for x in camera.left_x ..= camera.right_x {
