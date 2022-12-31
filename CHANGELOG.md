@@ -11,9 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Hud interface for player HP
 - With Hud interface the enemies informations can be showed if the player move it's cursor on a monster
 
-### Added
+### Changed
 
-- Enemies random move
+- Monster spawner rework to add informations to monster and increase readability
+- Spawn Rate is now to: 50% for goblins, 30% for Orc, 15% for Ogre and 5% for Ellin
 
 ## [0.4.0] - 2022-11-01
 
