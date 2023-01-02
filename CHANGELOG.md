@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0] - 2023-01-02
+
+### Added
+
+- Combat system for the player. Now when the player moves to a title and an enemy is here then the player initiates an attack. The damages are fixed to 1 HP
+- Combat system is implemented for monster to. Monster cannot attack each over. The damages are fixed to 1 HP
+
+### Changed
+
+- Now Waiting allows the player to heal himself of 1 HP 
+
 ## [0.5.0] - 2022-12-31
 
 ### Added
@@ -56,7 +67,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Camera which follow the Player
 - Graphics to all Tiles
 
-[unreleased]: https://github.com/ulphidius/dungeoncrawl/compare/v0.5.0...master
+[unreleased]: https://github.com/ulphidius/dungeoncrawl/compare/v0.6.0...master
+[0.6.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.2.0...v0.3.0
