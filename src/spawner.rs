@@ -1,5 +1,7 @@
 use crate::prelude::*;
 
+const PLAYER_HP: i32 = 10;
+
 const GOBLIN_HEALTH: i32 = 1;
 const GOBLIN_NAME: &str = "Goblin";
 
@@ -23,7 +25,7 @@ pub fn spawn_player(ecs: &mut World, pos: Point) {
                 color: ColorPair::new(WHITE, BLACK),
                 glyph: to_cp437('@'),
             },
-            Health{current: 20, max: 20},
+            Health{current: PLAYER_HP, max: PLAYER_HP},
         )
     );
 }
@@ -43,7 +45,7 @@ pub fn spawn_monster(
                 color: ColorPair::new(WHITE, BLACK),
                 glyph: glypth,
             },
-            MovingRandomly{},
+            ChasingPlayer{},
             Health{ current: health, max: health },
             Name(name)
         )
