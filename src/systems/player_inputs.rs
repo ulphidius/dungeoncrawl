@@ -11,6 +11,9 @@ pub fn player_input(
 ) {
     let mut players = <(Entity, &Point)>::query()
         .filter(component::<Player>());
+    let mut enemies = <(Entity, &Point)>::query()
+        .filter(component::<Enemy>());
+
     if let Some(key) = key {
         let delta = match key {
             VirtualKeyCode::Left => Point::new(-1, 0),
@@ -20,13 +23,33 @@ pub fn player_input(
             _ => Point::new(0, 0),
         };
 
-        players.iter(ecs).for_each(|(entity, pos)| {
-            let destination = *pos + delta;
-            command.push((
-                (),
-                WantsToMove{ entity: *entity, destination }
-            ));
-        });
+        let (player_entity, destination) = players.iter(ecs)
+            .find_map(|(entity, pos)| Some((*entity, *pos + delta)))
+            .unwrap();
+        
+
+        if delta.x != 0 || delta.y != 0 {
+            let mut hit_something = false;
+            
+            enemies.iter(ecs)
+                .filter(|(_, pos)| **pos == destination)
+                .for_each(|(entity, _)| {
+                    hit_something = true;
+
+                    command.push(((), WantsToAttack{
+                        attacker: player_entity,
+                        victim: *entity,
+                    }));
+                });
+
+            if !hit_something {
+                command.push(((), WantsToMove{
+                    entity: player_entity,
+                    destination
+                }));
+            }
+        }
+
         *turn_state = TurnState::PlayerTurn;
     }
 }
