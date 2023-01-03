@@ -76,3 +76,16 @@ fn ogre() -> Monster {
 fn ettin() -> Monster {
     return (ETTIN_HEALTH, ETTIN_NAME.to_string(), to_cp437('E'));
 }
+
+pub fn spawn_amulet_of_yala(ecs: &mut World, position: Point) {
+    ecs.push((
+        Item,
+        AmuletOfYala,
+        position,
+        Render{
+            color: ColorPair::new(WHITE, BLACK),
+            glyph: to_cp437('|'),
+        },
+        Name("Amulet of Yala".to_string()),
+    ));
+}

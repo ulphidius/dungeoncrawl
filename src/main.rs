@@ -51,6 +51,7 @@ impl State {
 
         let map_builder = MapBuilder::new(NUM_TILES, &mut rng);
         spawn_player(&mut ecs, map_builder.player_start);
+        spawn_amulet_of_yala(&mut ecs, map_builder.amulet_start);
         // TODO: Remove duplication room
         map_builder.rooms.iter()
             .skip(1)
@@ -80,20 +81,38 @@ impl State {
         ctx.print_color_centered(9, GREEN, BLACK, "Press Space to play again.");
 
         if let Some(VirtualKeyCode::Space) = ctx.key {
-            self.ecs = World::default();
-            self.resources = Resources::default();
-            let mut rng = RandomNumberGenerator::new();
-            let map_builder = MapBuilder::new(NUM_TILES, &mut rng);
-            spawn_player(&mut self.ecs, map_builder.player_start);
-            map_builder.rooms.iter()
-                .skip(1)
-                .map(|r| r.center())
-                .for_each(|pos| spawn_monster(&mut self.ecs, &mut rng, pos));
-            self.resources.insert(map_builder.map);
-            self.resources.insert(Camera::new(map_builder.player_start));
-            self.resources.insert(TurnState::AwaitingInput);
+            self.reset_game_state();
         }
     }
+
+    fn victory(&mut self, ctx: &mut BTerm) {
+        ctx.set_active_console(HUD_LAYER);
+        ctx.print_color_centered(2, GREEN, BLACK, "You have won !");
+        ctx.print_color_centered(4, WHITE, BLACK, "You put on the Amulet of Yala and feel its power course throught yout veins.");
+        ctx.print_color_centered(5, WHITE, BLACK, "Your town is saved, and you return to your normal life");
+        ctx.print_color_centered(7, WHITE, BLACK, "Press Space to play again.");
+        if let Some(VirtualKeyCode::Space) = ctx.key {
+            self.reset_game_state();
+        }
+    }
+
+    fn reset_game_state(&mut self) {
+        self.ecs = World::default();
+        self.resources = Resources::default();
+        let mut rng = RandomNumberGenerator::new();
+        let map_builder = MapBuilder::new(NUM_TILES, &mut rng);
+        spawn_player(&mut self.ecs, map_builder.player_start);
+        spawn_amulet_of_yala(&mut self.ecs, map_builder.amulet_start);
+        map_builder.rooms.iter()
+            .skip(1)
+            .map(|r| r.center())
+            .for_each(|pos| spawn_monster(&mut self.ecs, &mut rng, pos));
+        self.resources.insert(map_builder.map);
+        self.resources.insert(Camera::new(map_builder.player_start));
+        self.resources.insert(TurnState::AwaitingInput);
+    }
+
+
 }
 
 impl GameState for State {
@@ -119,6 +138,7 @@ impl GameState for State {
             TurnState::PlayerTurn => self.player_systems.execute(&mut self.ecs, &mut self.resources),
             TurnState::MonsterTurn => self.monster_systems.execute(&mut self.ecs, &mut self.resources),
             TurnState::GameOver => self.game_over(ctx),
+            TurnState::Victory => self.victory(ctx),
         }
 
         render_draw_buffer(ctx).expect("fail to render batch");
