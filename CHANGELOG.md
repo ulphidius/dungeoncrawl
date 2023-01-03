@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0] - 2023-01-03
+
+### Added
+
+- Game over screen at player death
+- Victory screen at player victory
+- Amulet of Yala is now spawn on the map
+- If the player finds the Amulet of Yala than a won
+
+### Fixed
+
+- Now the game don't crash at player defeat
+
 ## [0.7.0] - 2023-01-02
 
 ### Added
@@ -77,7 +90,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Camera which follow the Player
 - Graphics to all Tiles
 
-[unreleased]: https://github.com/ulphidius/dungeoncrawl/compare/v0.7.0...master
+[unreleased]: https://github.com/ulphidius/dungeoncrawl/compare/v0.8.0...master
+[0.8.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.4.0...v0.5.0
