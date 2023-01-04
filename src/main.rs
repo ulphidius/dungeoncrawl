@@ -56,7 +56,6 @@ impl State {
         map_builder.rooms.iter()
             .skip(1)
             .map(|room| room.center())
-            .inspect(|pos| println!("{:?}", pos))
             .for_each(|pos| spawn_monster(&mut ecs, &mut rng, pos));
 
         resources.insert(map_builder.map);
