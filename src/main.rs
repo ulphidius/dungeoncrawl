@@ -155,7 +155,7 @@ fn main() -> BError {
         .with_font("terminal8x8.png", CHAR_WIDTH, CHAR_HEIGHT)
         .with_simple_console(DISPLAY_WIDTH, DISPLAY_HEIGHT, "dungeonfont.png")
         .with_simple_console_no_bg(DISPLAY_WIDTH, DISPLAY_HEIGHT, "dungeonfont.png")
-        .with_simple_console_no_bg(DISPLAY_WIDTH*2, DISPLAY_HEIGHT*2, "terminal8x8.png")
+        .with_simple_console_no_bg(SCREEN_WIDTH*2, SCREEN_HEIGHT*2, "terminal8x8.png")
         .build()?;
 
     return main_loop(context, State::new());

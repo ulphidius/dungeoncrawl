@@ -1,5 +1,3 @@
-use legion::query::Query;
-
 use crate::prelude::*;
 
 #[system]
