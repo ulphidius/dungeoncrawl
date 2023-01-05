@@ -9,13 +9,15 @@ pub enum TileType {
 
 #[derive(Debug)]
 pub struct Map {
-    pub tiles: Vec<TileType>
+    pub tiles: Vec<TileType>,
+    pub revealed_tiles: Vec<bool>
 }
 
 impl Map {
     pub fn new(size: usize) -> Self {
         return Self {
             tiles: vec![TileType::Floor; size],
+            revealed_tiles: vec![false, size],
         };
     }
 
