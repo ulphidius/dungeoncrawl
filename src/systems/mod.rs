@@ -8,12 +8,14 @@ mod hud;
 mod tooltips;
 mod combat;
 mod chasing;
+mod field_of_view;
 
 use crate::prelude::*;
 
 pub fn build_input_scheduler() -> Schedule {
     return Schedule::builder()
         .add_system(player_inputs::player_input_system())
+        .add_system(field_of_view::field_of_view_system())
         .flush()
         .add_system(map_render::map_render_system())
         .add_system(entity_render::entity_render_system())
@@ -27,6 +29,8 @@ pub fn build_player_scheduler() -> Schedule {
         .add_system(combat::combat_system())
         .flush()
         .add_system(movement::movement_system())
+        .flush()
+        .add_system(field_of_view::field_of_view_system())
         .flush()
         .add_system(map_render::map_render_system())
         .add_system(entity_render::entity_render_system())
@@ -43,6 +47,8 @@ pub fn build_monster_scheduler() -> Schedule {
         .add_system(combat::combat_system())
         .flush()
         .add_system(movement::movement_system())
+        .flush()
+        .add_system(field_of_view::field_of_view_system())
         .flush()
         .add_system(map_render::map_render_system())
         .add_system(entity_render::entity_render_system())

@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.0] - 2023-01-05
+
+### Added
+
+- View Field for player, he have a sight of 8 tiles
+- View Field for monsters, they have a sight of 6 tiles
+
+### Changed
+
+- Monster can pursue the player only he can see him
+- The map isn't discovered by default, the player can only know if he has already discovered a title 
+
 ## [0.8.1] - 2023-01-04
 
 ### Fixed
@@ -41,7 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Combat system for the player. Now when the player moves to a title and an enemy is here then the player initiates an attack. The damages are fixed to 1 HP
+- Combat system for the player. Now when the player moves to a tile and an enemy is here then the player initiates an attack. The damages are fixed to 1 HP
 - Combat system is implemented for monster to. Monster cannot attack each over. The damages are fixed to 1 HP
 
 ### Changed
@@ -98,7 +110,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Camera which follow the Player
 - Graphics to all Tiles
 
-[unreleased]: https://github.com/ulphidius/dungeoncrawl/compare/v0.8.1...master
+[unreleased]: https://github.com/ulphidius/dungeoncrawl/compare/v0.9.0...master
+[0.9.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.8.1...v0.9.0
 [0.8.1]: https://github.com/ulphidius/dungeoncrawl/compare/v0.8.0...v0.8.1
 [0.8.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.6.0...v0.7.0

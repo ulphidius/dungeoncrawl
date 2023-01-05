@@ -1,6 +1,9 @@
 use crate::prelude::*;
 
 const PLAYER_HP: i32 = 10;
+const PLAYER_VIEW_RADIUS: i32 = 8;
+
+const MONSTER_VIEW_RADIUS: i32 = 6;
 
 const GOBLIN_HEALTH: i32 = 1;
 const GOBLIN_NAME: &str = "Goblin";
@@ -26,6 +29,7 @@ pub fn spawn_player(ecs: &mut World, pos: Point) {
                 glyph: to_cp437('@'),
             },
             Health{current: PLAYER_HP, max: PLAYER_HP},
+            FieldOfView::new(PLAYER_VIEW_RADIUS),
         )
     );
 }
@@ -47,7 +51,8 @@ pub fn spawn_monster(
             },
             ChasingPlayer{},
             Health{ current: health, max: health },
-            Name(name)
+            Name(name),
+            FieldOfView::new(MONSTER_VIEW_RADIUS),
         )
     );
 }

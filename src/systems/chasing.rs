@@ -6,6 +6,7 @@ const ATTACK_DISTANCE: f32 = 1.2; // Floating number are imprecise so we a value
 #[system]
 #[read_component(Point)]
 #[read_component(ChasingPlayer)]
+#[read_component(FieldOfView)]
 #[read_component(Health)]
 #[read_component(Player)]
 pub fn chasing(
@@ -13,7 +14,7 @@ pub fn chasing(
     ecs: &SubWorld,
     command: &mut CommandBuffer,
 ) {
-    let mut movers = <(Entity, &Point, &ChasingPlayer)>::query();
+    let mut movers = <(Entity, &Point, &ChasingPlayer, &FieldOfView)>::query();
     let mut positions = <(Entity, &Point, &Health)>::query();
     let mut player = <(&Point, &Player)>::query();
 
@@ -30,7 +31,11 @@ pub fn chasing(
     );
 
     movers.iter(ecs)
-        .for_each(|(entity, position, _)| {
+        .for_each(|(entity, position, _, field_of_view)| {
+            if !field_of_view.visible_tiles.contains(&player_position) {
+                return
+            }
+            
             let idx = map_idx(position.x, position.y);
             if let Some(destination) = DijkstraMap::find_lowest_exit(
                 &dijktra_map,
