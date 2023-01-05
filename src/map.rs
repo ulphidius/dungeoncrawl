@@ -17,7 +17,7 @@ impl Map {
     pub fn new(size: usize) -> Self {
         return Self {
             tiles: vec![TileType::Floor; size],
-            revealed_tiles: vec![false, size],
+            revealed_tiles: vec![false; size],
         };
     }
 
