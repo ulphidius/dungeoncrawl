@@ -14,3 +14,4 @@ publish = false
 [dependencies]
 bracket-lib = "0.8.7"
 legion = "~0.3.1"
+rand = "0.8.5"

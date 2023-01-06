@@ -2,20 +2,35 @@ use crate::prelude::*;
 mod empty;
 mod rooms;
 mod automata;
+mod drunkard;
 use empty::EmptyArchitect;
+use rand::distributions::Standard;
 use rooms::RoomsArchitect;
 use automata::CellularAutomataArchitect;
+use drunkard::DrunkardWalkArchitect;
 
 pub const NUMBER_OF_ROOMS: usize = 20;
 pub const NUMBER_OF_MONSTER: usize = 50;
+pub const MAX_DIJKSTRA_DEPTH: f32 = 1024.0;
 const PLAYER_MONSTER_SPAWN_DISTANCE: f32 = 10.0;
-const MAX_DIJKSTRA_DEPTH: f32 = 1024.0;
 const UNREACHABLE: &f32 = &f32::MAX;
 
 pub enum ArchitectAlgorithm {
     Empty,
     Rooms,
     Automata,
+    Drunkard,
+}
+
+impl rand::distributions::Distribution<ArchitectAlgorithm> for Standard {
+    fn sample<R: rand::Rng + ?Sized>(&self, rng: &mut R) -> ArchitectAlgorithm {
+        return match rng.gen_range(0..=3) {
+            0 => ArchitectAlgorithm::Empty,
+            1 => ArchitectAlgorithm::Rooms,
+            2 => ArchitectAlgorithm::Automata,
+            _ => ArchitectAlgorithm::Drunkard,
+        };
+    }
 }
 
 trait MapArchitect {
@@ -37,7 +52,14 @@ impl MapBuilder {
             ArchitectAlgorithm::Empty => EmptyArchitect{}.new(map_size, rng),
             ArchitectAlgorithm::Rooms => RoomsArchitect{}.new(map_size, rng),
             ArchitectAlgorithm::Automata => CellularAutomataArchitect{}.new(map_size, rng),
+            ArchitectAlgorithm::Drunkard => DrunkardWalkArchitect{}.new(map_size, rng),
         };
+    }
+
+    pub fn new_random(map_size: usize, rng: &mut RandomNumberGenerator) -> Self {
+        let algorithm: ArchitectAlgorithm = rand::random();
+
+        return MapBuilder::new(map_size, algorithm, rng);
     }
 
     fn fill(&mut self, tile: TileType) {
