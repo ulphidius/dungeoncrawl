@@ -3,11 +3,14 @@ mod empty;
 mod rooms;
 mod automata;
 mod drunkard;
+mod prefab;
 use empty::EmptyArchitect;
 use rand::distributions::Standard;
 use rooms::RoomsArchitect;
 use automata::CellularAutomataArchitect;
 use drunkard::DrunkardWalkArchitect;
+
+use self::prefab::apply_prefab;
 
 pub const NUMBER_OF_ROOMS: usize = 20;
 pub const NUMBER_OF_MONSTER: usize = 50;
@@ -48,12 +51,16 @@ pub struct MapBuilder {
 
 impl MapBuilder {
     pub fn new(map_size: usize, algorithm: ArchitectAlgorithm, rng: &mut RandomNumberGenerator) -> Self {
-        return match algorithm {
+        let mut map_builder = match algorithm {
             ArchitectAlgorithm::Empty => EmptyArchitect{}.new(map_size, rng),
             ArchitectAlgorithm::Rooms => RoomsArchitect{}.new(map_size, rng),
             ArchitectAlgorithm::Automata => CellularAutomataArchitect{}.new(map_size, rng),
             ArchitectAlgorithm::Drunkard => DrunkardWalkArchitect{}.new(map_size, rng),
         };
+
+        apply_prefab(&mut map_builder, rng);
+
+        return map_builder;
     }
 
     pub fn new_random(map_size: usize, rng: &mut RandomNumberGenerator) -> Self {
