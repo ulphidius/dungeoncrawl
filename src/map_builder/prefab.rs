@@ -64,8 +64,8 @@ pub fn apply_prefab(map_builder: &mut MapBuilder, rng: &mut RandomNumberGenerato
             .collect();
         let mut i = 0;
         
-        for ty in dbg!(placement.y..(placement.y + FORTRESS.2)) {
-            for tx in dbg!(placement.x..(placement.x + FORTRESS.1)) {
+        for ty in placement.y..(placement.y + FORTRESS.2) {
+            for tx in placement.x..(placement.x + FORTRESS.1) {
                 let idx = map_idx(tx, ty);
                 if i >= string_vec.len() {
                     continue;

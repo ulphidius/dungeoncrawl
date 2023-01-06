@@ -11,6 +11,7 @@ impl MapArchitect for EmptyArchitect {
             monster_spawns: Vec::new(),
             player_start: Point::zero(),
             amulet_start: Point::zero(),
+            theme: super::themes::DungeonTheme::new()
         };
         map_builder.fill(TileType::Floor);
         map_builder.player_start = Point::new(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);

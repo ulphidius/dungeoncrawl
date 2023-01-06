@@ -7,6 +7,7 @@ pub fn map_render(
     ecs: &SubWorld,
     #[resource] map: &Map,
     #[resource] camera: &Camera,
+    #[resource] theme: &Box<dyn MapTheme>
 ) {
     let mut field_of_view = <&FieldOfView>::query().filter(component::<Player>());
     let mut draw_batch = DrawBatch::new();
@@ -32,8 +33,8 @@ pub fn map_render(
             };
 
             let (color, glyph) = match map.tiles[idx] {
-                TileType::Floor => (ColorPair::new(tint, BLACK), to_cp437('.')),
-                TileType::Wall => (ColorPair::new(tint, BLACK), to_cp437('#')),
+                TileType::Floor => (ColorPair::new(tint, BLACK), theme.tile_to_render(map.tiles[idx])),
+                TileType::Wall => (ColorPair::new(tint, BLACK), theme.tile_to_render(map.tiles[idx])),
             };
 
             draw_batch.set(
