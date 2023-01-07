@@ -49,18 +49,16 @@ impl State {
         let mut resources = Resources::default();
         let mut rng = RandomNumberGenerator::new();
 
-        let map_builder = MapBuilder::new(NUM_TILES, &mut rng);
+        let map_builder = MapBuilder::new_random(NUM_TILES, &mut rng);
         spawn_player(&mut ecs, map_builder.player_start);
         spawn_amulet_of_yala(&mut ecs, map_builder.amulet_start);
-        // TODO: Remove duplication room
-        map_builder.rooms.iter()
-            .skip(1)
-            .map(|room| room.center())
-            .for_each(|pos| spawn_monster(&mut ecs, &mut rng, pos));
+        map_builder.monster_spawns.iter()
+            .for_each(|position| spawn_monster(&mut ecs, &mut rng, *position));
 
         resources.insert(map_builder.map);
         resources.insert(Camera::new(map_builder.player_start));
         resources.insert(TurnState::AwaitingInput);
+        resources.insert(map_builder.theme);
 
         return Self{
             ecs,
@@ -99,19 +97,17 @@ impl State {
         self.ecs = World::default();
         self.resources = Resources::default();
         let mut rng = RandomNumberGenerator::new();
-        let map_builder = MapBuilder::new(NUM_TILES, &mut rng);
+        let map_builder = MapBuilder::new_random(NUM_TILES, &mut rng);
         spawn_player(&mut self.ecs, map_builder.player_start);
         spawn_amulet_of_yala(&mut self.ecs, map_builder.amulet_start);
-        map_builder.rooms.iter()
-            .skip(1)
-            .map(|r| r.center())
-            .for_each(|pos| spawn_monster(&mut self.ecs, &mut rng, pos));
+        map_builder.monster_spawns.iter()
+            .for_each(|position| spawn_monster(&mut self.ecs, &mut rng, *position));
+
         self.resources.insert(map_builder.map);
         self.resources.insert(Camera::new(map_builder.player_start));
         self.resources.insert(TurnState::AwaitingInput);
+        self.resources.insert(map_builder.theme);
     }
-
-
 }
 
 impl GameState for State {
