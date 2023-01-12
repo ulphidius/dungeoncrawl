@@ -34,10 +34,15 @@ pub fn hud(ecs: &SubWorld) {
         ColorPair::new(WHITE, RED),
     );
 
-    let player = <(Entity, &Player)>::query()
-        .iter(ecs)
-        .find_map(|(entity, _player)| Some(*entity))
+    let (player, floor_number) = <(Entity, &Player)>::query().iter(ecs)
+        .find_map(|(entity, player)| Some((*entity, player.floor_number)))
         .unwrap();
+
+    draw_batch.print_color_right(
+        Point::new(SCREEN_WIDTH * 2, 1),
+        format!("Dungeon Level: {}", floor_number + 1),
+        ColorPair::new(YELLOW, BLACK),
+    );
 
     let mut y = 3;
     let mut item_query = <(&Item, &Name, &Carried)>::query();

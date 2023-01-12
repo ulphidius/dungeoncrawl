@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.12.0] - 2023-01-12
+
+### Added
+
+- New floor system to increase the number of playable level. Now the Amulet of Yala is spawn only in the last floor. The items are kept when the player change of floor. The current number of floor is set to 3
+
 ## [0.11.0] - 2023-01-10
 
 ### Added
@@ -137,7 +143,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Camera which follow the Player
 - Graphics to all Tiles
 
-[unreleased]: https://github.com/ulphidius/dungeoncrawl/compare/v0.11.0...master
+[unreleased]: https://github.com/ulphidius/dungeoncrawl/compare/v0.12.0...master
+[0.11.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.11.0...v0.12.0
 [0.11.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.10.0...v0.11.0
 [0.10.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.8.1...v0.9.0

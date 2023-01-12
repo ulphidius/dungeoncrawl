@@ -22,7 +22,7 @@ type Monster = (i32, String, FontCharType);
 pub fn spawn_player(ecs: &mut World, pos: Point) {
     ecs.push(
         (
-            Player,
+            Player{floor_number: 0},
             pos,
             Render {
                 color: ColorPair::new(WHITE, BLACK),

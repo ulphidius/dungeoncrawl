@@ -35,6 +35,7 @@ pub fn map_render(
             let (color, glyph) = match map.tiles[idx] {
                 TileType::Floor => (ColorPair::new(tint, BLACK), theme.tile_to_render(map.tiles[idx])),
                 TileType::Wall => (ColorPair::new(tint, BLACK), theme.tile_to_render(map.tiles[idx])),
+                TileType::Exit => (ColorPair::new(tint, BLACK), theme.tile_to_render(map.tiles[idx])),
             };
 
             draw_batch.set(
