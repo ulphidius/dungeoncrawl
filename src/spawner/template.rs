@@ -15,7 +15,8 @@ pub struct Template {
     pub provides: Option<Vec<(String, i32)>>,
     pub hp: Option<i32>,
     /// View range in tile
-    pub fov: Option<i32>, 
+    pub fov: Option<i32>,
+    pub base_damage: Option<i32>,
 }
 
 impl Template {
@@ -65,6 +66,13 @@ impl Template {
                         }
                     }
                 });
+        }
+
+        if let Some(damage) = &self.base_damage {
+            command.add_component(entity, Damage(*damage));
+            if self.entity_type == EntityType::Item {
+                command.add_component(entity, Weapon{});
+            }
         }
     }
 }
