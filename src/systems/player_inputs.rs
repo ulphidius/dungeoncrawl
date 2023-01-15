@@ -7,6 +7,7 @@ use crate::prelude::*;
 #[write_component(Health)]
 #[read_component(Item)]
 #[read_component(Carried)]
+#[read_component(Weapon)]
 pub fn player_input(
     ecs: &mut SubWorld,
     command: &mut CommandBuffer,
@@ -30,6 +31,16 @@ pub fn player_input(
                     .for_each(|(entity, _item, _item_position)| {
                         command.remove_component::<Point>(*entity);
                         command.add_component(*entity, Carried(player));
+
+                        if let Ok(entity) = ecs.entry_ref(*entity) {
+                            if entity.get_component::<Weapon>().is_ok() {
+                                <(Entity, &Carried, &Weapon)>::query().iter(ecs)
+                                    .filter(|(_, carried, _)| carried.0 == player)
+                                    .for_each(|(entity, _carried, _want_to_attack)| {
+                                        command.remove(*entity);
+                                    });
+                            }
+                        }
                     });
                 Point::new(0, 0)
             },

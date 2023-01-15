@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2023-01-15
+
+### Added
+
+- Entities generation from a config file. All items except the player and the Amuelet of Yala are definded in this file
+
+### Changed
+
+- Each entity have now a base attack value. The player can increase its attack with weapons. The weapons are store like other items. You don't have to use it to have its effect
+
 ## [0.12.0] - 2023-01-12
 
 ### Added
@@ -143,7 +153,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Camera which follow the Player
 - Graphics to all Tiles
 
-[unreleased]: https://github.com/ulphidius/dungeoncrawl/compare/v0.12.0...master
+[unreleased]: https://github.com/ulphidius/dungeoncrawl/compare/v1.0.0...master
+[1.0.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.12.0...v1.0.0
 [0.12.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.11.0...v0.12.0
 [0.11.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.10.0...v0.11.0
 [0.10.0]: https://github.com/ulphidius/dungeoncrawl/compare/v0.9.0...v0.10.0

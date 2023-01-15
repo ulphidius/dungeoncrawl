@@ -1,6 +1,6 @@
 [package]
 name = "dungeoncrawl"
-version = "0.11.0"
+version = "1.0.0"
 edition = "2021"
 authors = ["ulphidius"]
 readme = "README.md"
@@ -15,3 +15,5 @@ publish = false
 bracket-lib = "0.8.7"
 legion = "~0.3.1"
 rand = "0.8.5"
+ron = "0.8.0"
+serde = "1.0.152"

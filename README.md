@@ -28,3 +28,12 @@ The hero's hometown is suffering from a plague of monsters. Welling up from the 
 - Move to a data-driven design for spawning enemies
 - Consider some visual effects to make combat more visceral
 - Consider keeping score
+
+## Thanks
+
+To Herbert Wolverson for his book [Hands-on Rust](https://hands-on-rust.com/)
+
+To all artists:
+- https://opengameart.org/content/unfinished-dungeon-tileset
+- https://opengameart.org/content/fantasy-magic-set
+- https://opengameart.org/content/fantasy-sword-set
